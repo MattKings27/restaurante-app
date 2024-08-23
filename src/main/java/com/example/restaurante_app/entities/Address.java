@@ -14,11 +14,15 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
+    @Getter
     @Setter
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Setter
+    @Getter
     private String address;
 
     private boolean isDeleted;
@@ -31,4 +35,5 @@ public class Address {
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
     }
+
 }
