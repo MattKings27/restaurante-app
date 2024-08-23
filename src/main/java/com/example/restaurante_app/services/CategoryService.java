@@ -1,2 +1,4 @@
-package com.example.restaurante_app.services;public class CategoryService {
+package com.example.restaurante_app.services;
+
+public class CategoryService {
 }

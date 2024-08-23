@@ -1,2 +1,4 @@
-package com.example.restaurante_app.repositories;public interface CategoryRepository {
+package com.example.restaurante_app.repositories;
+
+public interface CategoryRepository {
 }

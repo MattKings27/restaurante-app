@@ -1,2 +1,4 @@
-package com.example.restaurante_app.repositories;public interface OrderRepository {
+package com.example.restaurante_app.repositories;
+
+public interface OrderRepository {
 }
