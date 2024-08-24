@@ -3,7 +3,6 @@ package com.example.restaurante_app.services;
 import com.example.restaurante_app.exceptions.ResourceNotFoundException;
 import com.example.restaurante_app.entities.User;
 import com.example.restaurante_app.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +10,11 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    private final UserRepository userRepository;
 
-    @Autowired
-    private UserRepository userRepository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     public List<User> getAllUsers() {
         return userRepository.findAll();

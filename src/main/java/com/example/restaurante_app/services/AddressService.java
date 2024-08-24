@@ -3,16 +3,17 @@ package com.example.restaurante_app.services;
 import com.example.restaurante_app.entities.Address;
 import com.example.restaurante_app.exceptions.ResourceNotFoundException;
 import com.example.restaurante_app.repositories.AddressRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class AddressService {
+    private final AddressRepository addressRepository;
 
-    @Autowired
-    private AddressRepository addressRepository;
+    public AddressService(AddressRepository addressRepository) {
+        this.addressRepository = addressRepository;
+    }
 
     public List<Address> getAllAddresses() {
         return addressRepository.findAll();

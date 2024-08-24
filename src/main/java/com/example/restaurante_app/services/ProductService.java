@@ -3,7 +3,6 @@ package com.example.restaurante_app.services;
 import com.example.restaurante_app.entities.Product;
 import com.example.restaurante_app.exceptions.ResourceNotFoundException;
 import com.example.restaurante_app.repositories.ProductRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -13,10 +12,11 @@ import java.util.List;
 
 @Service
 public class ProductService {
+    private final ProductRepository productRepository;
 
-    @Autowired
-    private ProductRepository productRepository;
-
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     public Page<Product> getAllProducts(Pageable pageable) {
         return productRepository.findAll(pageable);
