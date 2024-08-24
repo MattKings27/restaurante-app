@@ -1,23 +1,39 @@
 package com.example.restaurante_app.entities;
 
 
+import com.example.restaurante_app.entities.ids.OrderProductId;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.io.Serial;
+import java.io.Serializable;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
-public class OrderProduct {
+@Table(name = "orders_products")
+public class OrderProduct implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private OrderProductId id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
+    @MapsId("orderId")
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name = "product_id")
+    @MapsId("productId")
+    @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
-    private Integer quantity;
-
+    @Column(nullable = false)
+    private long quantity;
 }
