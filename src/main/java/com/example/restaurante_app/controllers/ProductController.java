@@ -1,6 +1,5 @@
 package com.example.restaurante_app.controllers;
 
-import com.example.restaurante_app.dtos.EditProduct;
 import com.example.restaurante_app.dtos.NewProduct;
 import com.example.restaurante_app.entities.Product;
 import com.example.restaurante_app.services.ProductService;
@@ -11,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/products")
 public class ProductController {
     private final ProductService productService;
@@ -42,11 +42,6 @@ public class ProductController {
     @PostMapping
     public Product createProduct(@RequestBody @Valid NewProduct newProduct) {
         return productService.createProduct(newProduct);
-    }
-
-    @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody @Valid EditProduct productDetails) {
-        return productService.updateProduct(id, productDetails);
     }
 
     @DeleteMapping("/{id}")

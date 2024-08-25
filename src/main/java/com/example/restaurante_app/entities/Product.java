@@ -1,5 +1,6 @@
 package com.example.restaurante_app.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,5 +50,6 @@ public class Product implements Serializable {
     private boolean isDeleted;
 
     @OneToMany(mappedBy = "product")
+    @JsonBackReference
     private List<OrderProduct> orderProducts;
 }
