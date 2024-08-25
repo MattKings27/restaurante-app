@@ -1,5 +1,6 @@
 package com.example.restaurante_app.services;
 
+import com.example.restaurante_app.dtos.CartProduct;
 import com.example.restaurante_app.dtos.NewOrder;
 import com.example.restaurante_app.entities.Order;
 import com.example.restaurante_app.entities.OrderProduct;
@@ -13,7 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class OrderService {
@@ -29,6 +30,13 @@ public class OrderService {
 
     public Page<Order> getAllOrders(Pageable pageable) {
         return orderRepository.findAll(pageable);
+    }
+
+    public List<CartProduct> getProductsByOrderId(long orderId) {
+        return orderProductRepository.findByOrderId(orderId)
+                .stream()
+                .map(it -> new CartProduct(it.getProduct(), it.getQuantity()))
+                .toList();
     }
 
     @Transactional
