@@ -9,6 +9,7 @@ import com.example.restaurante_app.repositories.ProductRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,8 +22,8 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Page<Product> getAllProducts(Pageable pageable) {
-        return productRepository.findAll(pageable);
+    public Page<Product> getAllProducts(Specification<Product>spec, Pageable pageable) {
+        return productRepository.findAll(spec, pageable);
     }
 
     public Page<Product> getProductsByCategory(Long categoryId, Pageable pageable) {
