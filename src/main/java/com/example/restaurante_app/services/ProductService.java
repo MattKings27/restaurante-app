@@ -41,7 +41,7 @@ public class ProductService {
     }
 
     public Product updateProduct(Long id, Product productDetails) {
-        Product product = getProductById(id);
+        Product product = productRepository.getReferenceById(id);
         product.setName(productDetails.getName());
         product.setDescription(productDetails.getDescription());
         product.setPrice(productDetails.getPrice());

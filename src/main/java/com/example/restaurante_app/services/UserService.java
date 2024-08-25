@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public User updateUser(Long id, User userDetails) {
-        User user = getUserById(id);
+        User user = userRepository.getReferenceById(id);
         user.setName(userDetails.getName());
         user.setEmail(userDetails.getEmail());
         user.setPassword(userDetails.getPassword());

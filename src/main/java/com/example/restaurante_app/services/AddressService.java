@@ -28,7 +28,7 @@ public class AddressService {
     }
 
     public Address updateAddress(Long id, Address addressDetails) {
-        Address address = getAddressById(id);
+        Address address = addressRepository.getReferenceById(id);
         address.setAddress(addressDetails.getAddress());
         address.setDeleted(addressDetails.isDeleted());
         return addressRepository.save(address);
