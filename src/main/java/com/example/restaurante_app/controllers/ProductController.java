@@ -1,7 +1,11 @@
 package com.example.restaurante_app.controllers;
 
+import com.example.restaurante_app.dtos.EditProduct;
+import com.example.restaurante_app.dtos.NewProduct;
 import com.example.restaurante_app.entities.Product;
 import com.example.restaurante_app.services.ProductService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +30,7 @@ public class ProductController {
     }
 
     @GetMapping("/search")
-    public Page<Product> searchProducts(@RequestParam String keyword, Pageable pageable) {
+    public Page<Product> searchProducts(@RequestParam @Valid @NotBlank String keyword, Pageable pageable) {
         return productService.searchProducts(keyword, pageable);
     }
 
@@ -36,12 +40,12 @@ public class ProductController {
     }
 
     @PostMapping
-    public Product createProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public Product createProduct(@RequestBody @Valid NewProduct newProduct) {
+        return productService.createProduct(newProduct);
     }
 
     @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
+    public Product updateProduct(@PathVariable Long id, @RequestBody @Valid EditProduct productDetails) {
         return productService.updateProduct(id, productDetails);
     }
 

@@ -1,8 +1,11 @@
 package com.example.restaurante_app.services;
 
+import com.example.restaurante_app.dtos.EditProduct;
+import com.example.restaurante_app.dtos.NewProduct;
 import com.example.restaurante_app.entities.Product;
 import com.example.restaurante_app.exceptions.ResourceNotFoundException;
 import com.example.restaurante_app.repositories.ProductRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -36,16 +39,15 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Product not found with id " + id));
     }
 
-    public Product createProduct(Product product) {
+    public Product createProduct(NewProduct newProduct) {
+        var product = new Product();
+        BeanUtils.copyProperties(newProduct, product);
         return productRepository.save(product);
     }
 
-    public Product updateProduct(Long id, Product productDetails) {
-        Product product = productRepository.getReferenceById(id);
-        product.setName(productDetails.getName());
-        product.setDescription(productDetails.getDescription());
-        product.setPrice(productDetails.getPrice());
-        product.setImage(productDetails.getImage());
+    public Product updateProduct(Long id, EditProduct editProduct) {
+        var product = productRepository.getReferenceById(id);
+        BeanUtils.copyProperties(editProduct, product);
         return productRepository.save(product);
     }
 

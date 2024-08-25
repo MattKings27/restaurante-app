@@ -1,8 +1,11 @@
 package com.example.restaurante_app.services;
 
+import com.example.restaurante_app.dtos.EditUser;
+import com.example.restaurante_app.dtos.NewUser;
 import com.example.restaurante_app.exceptions.ResourceNotFoundException;
 import com.example.restaurante_app.entities.User;
 import com.example.restaurante_app.repositories.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,15 +27,19 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User not found with id " + id));
     }
 
-    public User createUser(User user) {
+    public User createUser(NewUser newUser) {
+        var user = new User();
+        BeanUtils.copyProperties(newUser, user);
+        // TODO: Implement hashing
+        user.setPassword(newUser.password());
         return userRepository.save(user);
     }
 
-    public User updateUser(Long id, User userDetails) {
+    public User updateUser(Long id, EditUser editUser) {
         User user = userRepository.getReferenceById(id);
-        user.setName(userDetails.getName());
-        user.setEmail(userDetails.getEmail());
-        user.setPassword(userDetails.getPassword());
+        BeanUtils.copyProperties(editUser, user);
+        // TODO: Implement hashing
+        user.setPassword(editUser.password());
         return userRepository.save(user);
     }
 

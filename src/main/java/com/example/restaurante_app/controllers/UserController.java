@@ -1,7 +1,10 @@
 package com.example.restaurante_app.controllers;
 
+import com.example.restaurante_app.dtos.EditUser;
+import com.example.restaurante_app.dtos.NewUser;
 import com.example.restaurante_app.entities.User;
 import com.example.restaurante_app.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,14 +31,14 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user) {
-        User createdUser = userService.createUser(user);
+    public ResponseEntity<User> createUser(@RequestBody @Valid NewUser newUser) {
+        User createdUser = userService.createUser(newUser);
         return ResponseEntity.ok(createdUser);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody User userDetails) {
-        User updatedUser = userService.updateUser(id, userDetails);
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody EditUser editUser) {
+        User updatedUser = userService.updateUser(id, editUser);
         return ResponseEntity.ok(updatedUser);
     }
 
