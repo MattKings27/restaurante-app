@@ -1,5 +1,6 @@
 package com.example.restaurante_app.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,5 +29,6 @@ public class Category implements Serializable {
     private String name;
 
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private List<Product> products;
 }

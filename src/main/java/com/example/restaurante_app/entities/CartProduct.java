@@ -22,9 +22,8 @@ public class CartProduct implements Serializable {
     private static final long serialVersionUID = 1;
 
     @Id
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
 
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
@@ -32,17 +31,4 @@ public class CartProduct implements Serializable {
 
     @Column(nullable = false)
     private long quantity;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        CartProduct that = (CartProduct) o;
-        return Objects.equals(user, that.user);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(user);
-    }
 }

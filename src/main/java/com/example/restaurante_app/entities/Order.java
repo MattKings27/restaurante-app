@@ -26,9 +26,11 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Column(nullable = false)
+    private String customerName;
+
+    @Column(nullable = false)
+    private String address;
 
     @Column(nullable = false)
     private String status;
@@ -38,7 +40,4 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProduct> orderProducts;
-
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-    private Shipping shipping;
 }

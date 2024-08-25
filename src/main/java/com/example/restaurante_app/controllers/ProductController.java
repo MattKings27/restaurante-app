@@ -11,7 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/products")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/products")
 public class ProductController {
     private final ProductService productService;
 
@@ -42,11 +43,6 @@ public class ProductController {
     @PostMapping
     public Product createProduct(@RequestBody @Valid NewProduct newProduct) {
         return productService.createProduct(newProduct);
-    }
-
-    @PutMapping("/{id}")
-    public Product updateProduct(@PathVariable Long id, @RequestBody @Valid EditProduct productDetails) {
-        return productService.updateProduct(id, productDetails);
     }
 
     @DeleteMapping("/{id}")

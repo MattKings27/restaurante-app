@@ -1,6 +1,10 @@
 package com.example.restaurante_app.dtos;
 
+import com.example.restaurante_app.entities.Category;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
-public record NewProduct(@NotBlank String name, @NotBlank String description, @NotBlank String image, @NotBlank String price, @NotBlank String category) {
+import java.math.BigDecimal;
+
+public record NewProduct(@NotBlank String name, @NotBlank String description, @NotBlank String image, @NotNull BigDecimal price, @NotNull Category category) {
 }
