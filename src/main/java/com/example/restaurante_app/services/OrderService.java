@@ -10,7 +10,10 @@ import com.example.restaurante_app.repositories.ProductRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -28,8 +31,9 @@ public class OrderService {
         this.orderProductRepository = orderProductRepository;
     }
 
-    public Page<Order> getAllOrders(Pageable pageable) {
-        return orderRepository.findAll(pageable);
+    public Page<Order> getAllOrders(Specification<Order> spec, Sort sort, Pageable pageable) {
+        var pageRequest = PageRequest.of(pageable.getPageNumber(), pageable.getPageSize(), sort);
+        return orderRepository.findAll(spec, pageRequest);
     }
 
     public List<CartProduct> getProductsByOrderId(long orderId) {
