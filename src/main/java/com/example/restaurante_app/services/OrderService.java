@@ -39,7 +39,7 @@ public class OrderService {
     public List<CartProduct> getProductsByOrderId(long orderId) {
         return orderProductRepository.findByOrderId(orderId)
                 .stream()
-                .map(it -> new CartProduct(it.getProduct(), it.getQuantity()))
+                .map(it -> new CartProduct(productRepository.getAnyProductById(it.getId().productId()), it.getQuantity()))
                 .toList();
     }
 

@@ -1,6 +1,7 @@
 package com.example.restaurante_app.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,7 @@ import java.util.List;
 @Table(name = "products")
 @SQLDelete(sql = "UPDATE products SET is_deleted = true WHERE id = ?")
 @SQLRestriction("is_deleted = false")
+@JsonIgnoreProperties({"hibernateLazyInitializer"})
 public class Product implements Serializable {
     @Serial
     private static final long serialVersionUID = 1;
