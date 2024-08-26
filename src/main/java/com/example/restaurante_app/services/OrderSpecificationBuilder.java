@@ -17,7 +17,7 @@ public class OrderSpecificationBuilder {
         return Specification
                 .where(OrderSpecifications.hasCustomerName(customerName))
                 .and(OrderSpecifications.hasAddress(address))
-                .and(OrderSpecifications.hasStatus(status))
+                .and(OrderSpecifications.isStatus(status))
                 .and(OrderSpecifications.startingCreatedAt(minDate))
                 .and(OrderSpecifications.endingCreatedAt(maxDate));
     }

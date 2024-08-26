@@ -1,22 +1,22 @@
 package com.example.restaurante_app.specifications;
 
 import com.example.restaurante_app.entities.Order;
-import com.example.restaurante_app.entities.Product;
 import org.springframework.data.jpa.domain.Specification;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class OrderSpecifications {
     public static Specification<Order> hasCustomerName(String customerName) {
-        return (root, query, builder) -> customerName == null ? null : builder.equal(root.get("customerName"), customerName);
+        return (root, query, builder) -> customerName == null ? null :
+                builder.like(builder.lower(root.get("customerName")), "%" + customerName.toLowerCase() + "%");
     }
 
     public static Specification<Order> hasAddress(String address) {
-        return (root, query, builder) -> address == null ? null : builder.equal(root.get("address"), address);
+        return (root, query, builder) -> address == null ? null :
+                builder.like(builder.lower(root.get("address")), "%" + address.toLowerCase() + "%");
     }
 
-    public static Specification<Order> hasStatus(String status) {
+    public static Specification<Order> isStatus(String status) {
         return (root, query, builder) -> status == null ? null : builder.equal(root.get("status"), status);
     }
 
