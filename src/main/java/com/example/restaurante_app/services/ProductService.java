@@ -22,7 +22,7 @@ public class ProductService {
         this.categoryRepository = categoryRepository;
     }
 
-    public Page<Product> getAllProducts(Specification<Product>spec, Pageable pageable) {
+    public Page<Product> getAllProducts(Specification<Product> spec, Pageable pageable) {
         return productRepository.findAll(spec, pageable);
     }
 

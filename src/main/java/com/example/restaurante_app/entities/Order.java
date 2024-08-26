@@ -1,6 +1,7 @@
 package com.example.restaurante_app.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,6 +39,7 @@ public class Order implements Serializable {
     @Column(nullable = false)
     private LocalDateTime createdAt;
 
+    @JsonBackReference
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderProduct> orderProducts;
 }
